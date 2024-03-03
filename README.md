@@ -26,8 +26,9 @@ kubectl config current-context
 
 4. Verify that each node in your cluster's node pool has a Secrets Store CSI Driver pod and a Secrets Store Provider Azure pod running
 
+```
 kubectl get pods -n kube-system -l 'app in (secrets-store-csi-driver,secrets-store-provider-azure)' -o wide
-
+```
 
 5. Create a key vault with Azure role-based access control (Azure RBAC).
 
