@@ -38,7 +38,7 @@ az keyvault create -n aks-demo-pavan -g keyvault-demo -l eastus --enable-rbac-au
 
 6. Do the Role assignment
 
-Go to IAM -> Click on Add role assignment -> Select the Key Vault Administrator -> Next -> Select members -> Yourself -> Review + assign
+    Go to IAM -> Click on Add role assignment -> Select the Key Vault Administrator -> Next -> Select members -> Yourself -> Review + assign
 
 
 Create a Secret 
