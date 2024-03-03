@@ -40,8 +40,8 @@ az keyvault create -n aks-demo-pavan -g keyvault-demo -l eastus --enable-rbac-au
 
     Go to IAM -> Click on Add role assignment -> Select the Key Vault Administrator -> Next -> Select members -> Yourself -> Review + assign
 
+    Create a Secret 
 
-Create a Secret 
 
 7. Connect your Azure ID to the Azure Key Vault Secrets Store CSI Driver
 
