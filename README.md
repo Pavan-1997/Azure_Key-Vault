@@ -47,6 +47,7 @@ az keyvault create -n aks-demo-pavan -g keyvault-demo -l eastus --enable-rbac-au
 
     Configure workload identity
 
+```
 export SUBSCRIPTION_ID=cfb43fdc-af53-41d8-9f37-626207b22277
 export RESOURCE_GROUP=keyvault-demo
 export UAMI=azurekeyvaultsecretsprovider-keyvault-demo-cluster
@@ -54,6 +55,7 @@ export KEYVAULT_NAME=aks-demo-pavan
 export CLUSTER_NAME=keyvault-demo-cluster
 
 az account set --subscription $SUBSCRIPTION_ID
+```
 
 
 8. Create a managed identity
