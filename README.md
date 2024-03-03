@@ -60,10 +60,12 @@ az account set --subscription $SUBSCRIPTION_ID
 
 8. Create a managed identity
 
+```
 az identity create --name $UAMI --resource-group $RESOURCE_GROUP
 
 export USER_ASSIGNED_CLIENT_ID="$(az identity show -g $RESOURCE_GROUP --name $UAMI --query 'clientId' -o tsv)"
 export IDENTITY_TENANT=$(az aks show --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP --query identity.tenantId -o tsv)
+```
 
 
 9. Create a role assignment that grants the workload ID access the key vault
