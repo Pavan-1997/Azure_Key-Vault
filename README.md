@@ -14,12 +14,15 @@ az aks create --name keyvault-demo-cluster -g keyvault-demo --node-count 1 --ena
 
 3. Connect to the K8s cluster
 
+```
 az account set --subscription cfb43fdc-af53-41d8-9f37-626207b22277
-
+```
+```
 az aks get-credentials --resource-group keyvault-demo --name keyvault-demo-cluster --overwrite-existing
-
+```
+```
 kubectl config current-context
-
+```
 
 4. Verify that each node in your cluster's node pool has a Secrets Store CSI Driver pod and a Secrets Store Provider Azure pod running
 
