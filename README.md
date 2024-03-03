@@ -70,9 +70,11 @@ export IDENTITY_TENANT=$(az aks show --name $CLUSTER_NAME --resource-group $RESO
 
 9. Create a role assignment that grants the workload ID access the key vault
 
+```
 export KEYVAULT_SCOPE=$(az keyvault show --name $KEYVAULT_NAME --query id -o tsv)
 
 az role assignment create --role "Key Vault Administrator" --assignee $USER_ASSIGNED_CLIENT_ID --scope $KEYVAULT_SCOPE
+```
 
 IF NOT
 
