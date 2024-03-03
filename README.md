@@ -2,8 +2,9 @@
 
 1. Create Azure Resource Group
 
+```
 az group create --name keyvault-demo --location eastus
-
+```
 
 2. Create an AKS cluster with Azure Key Vault provider for Secrets Store CSI Driver support
 az aks create --name keyvault-demo-cluster -g keyvault-demo --node-count 1 --enable-addons azure-keyvault-secrets-provider --enable-oidc-issuer --enable-workload-identity
