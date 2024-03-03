@@ -45,7 +45,7 @@ az keyvault create -n aks-demo-pavan -g keyvault-demo -l eastus --enable-rbac-au
 
 7. Connect your Azure ID to the Azure Key Vault Secrets Store CSI Driver
 
-Configure workload identity
+    Configure workload identity
 
 export SUBSCRIPTION_ID=cfb43fdc-af53-41d8-9f37-626207b22277
 export RESOURCE_GROUP=keyvault-demo
