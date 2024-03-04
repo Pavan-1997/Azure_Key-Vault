@@ -11,7 +11,6 @@ az group create --name keyvault-demo --location eastus
 ```
 az aks create --name keyvault-demo-cluster -g keyvault-demo --node-count 1 --enable-addons azure-keyvault-secrets-provider --enable-oidc-issuer --enable-workload-identity
 ```
-![FEDERATION](https://github.com/Pavan-1997/Azure_Key-Vault/assets/32020205/39f64899-04d2-49ee-8f6c-6719f20d2851)
 
 
 3. Connect to the K8s cluster
@@ -91,6 +90,8 @@ Go to Resource Group -> keyvault-demo -> Select Managed identity -> Managed iden
 
 export AKS_OIDC_ISSUER="$(az aks show --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --query "oidcIssuerProfile.issuerUrl" -o tsv)"
 echo $AKS_OIDC_ISSUER
+
+![OIDC](https://github.com/Pavan-1997/Azure_Key-Vault/assets/32020205/a830fbcb-e888-4e1c-956d-fc1bed0fad0e)
 
 
 11. Create the service account for the pod
