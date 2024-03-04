@@ -11,6 +11,8 @@ az group create --name keyvault-demo --location eastus
 ```
 az aks create --name keyvault-demo-cluster -g keyvault-demo --node-count 1 --enable-addons azure-keyvault-secrets-provider --enable-oidc-issuer --enable-workload-identity
 ```
+![FEDERATION](https://github.com/Pavan-1997/Azure_Key-Vault/assets/32020205/39f64899-04d2-49ee-8f6c-6719f20d2851)
+
 
 3. Connect to the K8s cluster
 
