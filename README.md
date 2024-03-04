@@ -84,3 +84,92 @@ IF NOT
 
 Go to Resource Group -> keyvault-demo -> Select Managed identity -> Managed identity - User-assigned -> Select - azurekeyvaultsecretsprovider-keyvault-demo-cluster
 /subscriptions/cfb43fdc-af53-41d8-9f37-626207b22277/resourceGroups/MC_keyvault -> Select -> Click on Review + assign
+
+10. Get the AKS cluster OIDC Issuer URL
+
+export AKS_OIDC_ISSUER="$(az aks show --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --query "oidcIssuerProfile.issuerUrl" -o tsv)"
+echo $AKS_OIDC_ISSUER
+
+
+11. Create the service account for the pod
+
+export SERVICE_ACCOUNT_NAME="workload-identity-sa"
+export SERVICE_ACCOUNT_NAMESPACE="default" 
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    azure.workload.identity/client-id: ${USER_ASSIGNED_CLIENT_ID}
+  name: ${SERVICE_ACCOUNT_NAME}
+  namespace: ${SERVICE_ACCOUNT_NAMESPACE}
+EOF
+
+
+12. Setup Federation 
+
+export FEDERATED_IDENTITY_NAME="aksfederatedidentity" 
+
+az identity federated-credential create --name $FEDERATED_IDENTITY_NAME --identity-name $UAMI --resource-group $RESOURCE_GROUP --issuer ${AKS_OIDC_ISSUER} --subject system:serviceaccount:${SERVICE_ACCOUNT_NAMESPACE}:${SERVICE_ACCOUNT_NAME}
+
+
+13. Create the Secret Provider Class
+
+cat <<EOF | kubectl apply -f -
+# This is a SecretProviderClass example using workload identity to access your key vault
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: azure-kvname-wi # needs to be unique per namespace
+spec:
+  provider: azure
+  parameters:
+    usePodIdentity: "false"
+    clientID: "${USER_ASSIGNED_CLIENT_ID}" # Setting this to use workload identity
+    keyvaultName: ${KEYVAULT_NAME}       # Set to the name of your key vault
+    cloudName: ""                         # [OPTIONAL for Azure] if not provided, the Azure environment defaults to AzurePublicCloud
+    objects:  |
+      array:
+        - |
+          objectName: secret-pavan             # Set to the name of your secret
+          objectType: secret              # object types: secret, key, or cert
+          objectVersion: ""               # [OPTIONAL] object versions, default to latest if empty
+        - |
+          objectName: key-pavan                # Set to the name of your key
+          objectType: key
+          objectVersion: ""
+    tenantId: "${IDENTITY_TENANT}"        # The tenant ID of the key vault
+EOF
+
+
+14. Create a sample pod to mount the secrets
+
+cat <<EOF | kubectl apply -f -
+# This is a sample pod definition for using SecretProviderClass and workload identity to access your key vault
+kind: Pod
+apiVersion: v1
+metadata:
+  name: busybox-secrets-store-inline-wi
+  labels:
+    azure.workload.identity/use: "true"
+spec:
+  serviceAccountName: "workload-identity-sa"
+  containers:
+    - name: busybox
+      image: registry.k8s.io/e2e-test-images/busybox:1.29-4
+      command:
+        - "/bin/sleep"
+        - "10000"
+      volumeMounts:
+      - name: secrets-store01-inline
+        mountPath: "/mnt/secrets-store"
+        readOnly: true
+  volumes:
+    - name: secrets-store01-inline
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: "azure-kvname-wi"
+EOF
