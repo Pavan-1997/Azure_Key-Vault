@@ -93,6 +93,7 @@ echo $AKS_OIDC_ISSUER
 
 11. Create the service account for the pod
 
+```
 export SERVICE_ACCOUNT_NAME="workload-identity-sa"
 export SERVICE_ACCOUNT_NAMESPACE="default" 
 
