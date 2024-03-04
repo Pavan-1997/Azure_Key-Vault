@@ -31,6 +31,8 @@ kubectl config current-context
 ```
 kubectl get pods -n kube-system -l 'app in (secrets-store-csi-driver,secrets-store-provider-azure)' -o wide
 ```
+![CSI](https://github.com/Pavan-1997/Azure_Key-Vault/assets/32020205/1dcace50-dd03-40a8-9589-89bed610eec9)
+
 
 5. Create a key vault with Azure role-based access control (Azure RBAC).
 
