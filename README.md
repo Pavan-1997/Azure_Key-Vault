@@ -107,6 +107,8 @@ metadata:
   namespace: ${SERVICE_ACCOUNT_NAMESPACE}
 EOF
 ```
+![SA](https://github.com/Pavan-1997/Azure_Key-Vault/assets/32020205/46770b58-a3ed-49d3-a725-79d1017f18d1)
+
 
 12. Setup Federation 
 
