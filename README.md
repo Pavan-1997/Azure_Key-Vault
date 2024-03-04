@@ -148,6 +148,7 @@ spec:
     tenantId: "${IDENTITY_TENANT}"        # The tenant ID of the key vault
 EOF
 ```
+![SECRET-PROVIDER-CLASS](https://github.com/Pavan-1997/Azure_Key-Vault/assets/32020205/ad8d9ec1-914a-4a25-974e-d6012d6547da)
 
 
 14. Create a sample pod to mount the secrets
