@@ -117,6 +117,7 @@ export FEDERATED_IDENTITY_NAME="aksfederatedidentity"
 
 az identity federated-credential create --name $FEDERATED_IDENTITY_NAME --identity-name $UAMI --resource-group $RESOURCE_GROUP --issuer ${AKS_OIDC_ISSUER} --subject system:serviceaccount:${SERVICE_ACCOUNT_NAMESPACE}:${SERVICE_ACCOUNT_NAME}
 ```
+![FEDERATION](https://github.com/Pavan-1997/Azure_Key-Vault/assets/32020205/ab5f1727-ba08-4bc7-b2f0-5411c819f387)
 
 
 13. Create the Secret Provider Class
