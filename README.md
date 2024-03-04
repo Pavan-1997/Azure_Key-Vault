@@ -148,6 +148,7 @@ EOF
 
 14. Create a sample pod to mount the secrets
 
+```
 cat <<EOF | kubectl apply -f -
 # This is a sample pod definition for using SecretProviderClass and workload identity to access your key vault
 kind: Pod
@@ -176,3 +177,4 @@ spec:
         volumeAttributes:
           secretProviderClass: "azure-kvname-wi"
 EOF
+```
