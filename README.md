@@ -119,6 +119,7 @@ az identity federated-credential create --name $FEDERATED_IDENTITY_NAME --identi
 
 13. Create the Secret Provider Class
 
+```
 cat <<EOF | kubectl apply -f -
 # This is a SecretProviderClass example using workload identity to access your key vault
 apiVersion: secrets-store.csi.x-k8s.io/v1
@@ -144,6 +145,7 @@ spec:
           objectVersion: ""
     tenantId: "${IDENTITY_TENANT}"        # The tenant ID of the key vault
 EOF
+```
 
 
 14. Create a sample pod to mount the secrets
