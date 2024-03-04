@@ -23,6 +23,8 @@ az aks get-credentials --resource-group keyvault-demo --name keyvault-demo-clust
 ```
 kubectl config current-context
 ```
+![CONTEXT](https://github.com/Pavan-1997/Azure_Key-Vault/assets/32020205/98d1dfae-20a0-4f5a-8ed4-39b45b4c9d44)
+
 
 4. Verify that each node in your cluster's node pool has a Secrets Store CSI Driver pod and a Secrets Store Provider Azure pod running
 
