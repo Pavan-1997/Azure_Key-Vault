@@ -110,9 +110,11 @@ EOF
 
 12. Setup Federation 
 
+```
 export FEDERATED_IDENTITY_NAME="aksfederatedidentity" 
 
 az identity federated-credential create --name $FEDERATED_IDENTITY_NAME --identity-name $UAMI --resource-group $RESOURCE_GROUP --issuer ${AKS_OIDC_ISSUER} --subject system:serviceaccount:${SERVICE_ACCOUNT_NAMESPACE}:${SERVICE_ACCOUNT_NAME}
+```
 
 
 13. Create the Secret Provider Class
